@@ -1,0 +1,32 @@
+<project name="WebBrowsingAutomationTool" basedir=".">
+    <property name="bin.dir" value="bin"/>
+    <property name="src.dir" value="src"/>
+    <property name="out.dir" value="out"/>
+
+    <target name="init">
+       <mkdir dir="${out.dir}/classes"/>
+       <mkdir dir="${bin.dir}" />
+    </target>
+
+    <target name="clean" depends="init">
+        <delete includeEmptyDirs="true">
+            <fileset dir="${out.dir}/classes" includes="*/**"/>
+            <fileset dir="${bin.dir}" includes="*/**"/>
+        </delete>
+    </target>
+
+    <target name="compile" depends="clean">
+        <javac srcdir="${src.dir}" destdir="${out.dir}/classes">
+            <classpath path="C:\Program Files\Java\jdk1.7.0_07\jre\lib\jfxrt.jar"/>
+        </javac>
+    </target>
+
+    <target name="jar" depends="compile">
+        <jar destfile="${bin.dir}/BubbleBurst.jar" basedir="${out.dir}/classes"
+             includes="bubbleBurst/**">
+            <manifest>
+                <attribute name="Main-Class" value="bubbleBurst.BubbleFrameController"/>
+            </manifest>
+        </jar>
+    </target>
+</project>
